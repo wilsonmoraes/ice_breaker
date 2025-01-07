@@ -1,6 +1,8 @@
 from dotenv import load_dotenv
+from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 
 information = """
 Elon Reeve Musk (/ˈiːlɒn mʌsk/; born June 28, 1971) is a businessman known for his key roles in the space company SpaceX and the automotive company Tesla, Inc. He is also known for his ownership of X Corp. (the company that operates the social media platform X, formerly Twitter), and his role in the founding of the Boring Company, xAI, Neuralink, and OpenAI. Musk is the wealthiest individual in the world; as of January 2025, Forbes estimates his net worth to be US$421 billion.[2]
@@ -28,9 +30,10 @@ if __name__ == "__main__":
         input_variables=["information"], template=summary_template
     )
 
-    llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
+    # llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
+    llm = ChatOllama(model="llama3", temperature=0)
 
-    chain = summary_prompt_template | llm
+    chain = summary_prompt_template | llm | StrOutputParser()
 
     res = chain.invoke({"information": information})
 
