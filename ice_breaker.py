@@ -1,7 +1,6 @@
+from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
-import os
-from dotenv import load_dotenv
 
 information = """
 Elon Reeve Musk (/ˈiːlɒn mʌsk/; born June 28, 1971) is a businessman known for his key roles in the space company SpaceX and the automotive company Tesla, Inc. He is also known for his ownership of X Corp. (the company that operates the social media platform X, formerly Twitter), and his role in the founding of the Boring Company, xAI, Neuralink, and OpenAI. Musk is the wealthiest individual in the world; as of January 2025, Forbes estimates his net worth to be US$421 billion.[2]
@@ -20,7 +19,7 @@ if __name__ == "__main__":
     print("Hello LangChain!")
 
     summary_template = """
-        given the {information} about a person from I want you to create:
+        given the {information} in portuguese about a person from I want you to create:
         1. a short summary
         2. two interesting facts about them
     """
@@ -34,3 +33,5 @@ if __name__ == "__main__":
     chain = summary_prompt_template | llm
 
     res = chain.invoke({"information": information})
+
+    print(res)
