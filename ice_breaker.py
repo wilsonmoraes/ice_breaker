@@ -15,7 +15,7 @@ if __name__ == "__main__":
     summary_template = """
     given the Linkedin information {information} about a person I want you to create in portuguese:
     1. A short summary
-    2. two interesting facts about them
+    2. list the negative points of his profile
     """
 
     summary_prompt_template = PromptTemplate(
@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     chain = summary_prompt_template | llm
     linkedin_data = scrape_linkedin_profile(
-        linkedin_profile_url="https://www.linkedin.com/in/alexandre-mota-a8119896/"
+        linkedin_profile_url="https://www.linkedin.com/in/wilsonmoraes/"
     )
     parser = StrOutputParser()
 
